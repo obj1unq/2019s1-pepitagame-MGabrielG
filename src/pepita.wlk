@@ -9,12 +9,15 @@ object pepita {
 	method image(){
 					if (energia > 100){
 						return "pepita-gorda-raw.png"
-					}else {
-						return "pepita.png"
-						
-						}
+					} else {
+						return "pepita.png"					
+					}
 	}
-
+	
+	method nombre(){
+		return "Pepita"
+	}
+	
 	method come(comida) {
 		energia = energia + comida.energia()
 	}
@@ -42,4 +45,22 @@ object pepita {
 
 }
 
+object pepona {
+	var property position = game.at(3,4) 
+	method image() = "pepona.png"
+	method nombre() = "Pepona"
 
+	method nuevaAmiga(ave){
+		game.say(self, "¡Hola" + ave.nombre() + "!")
+	}
+
+}
+
+object roque{
+	var property position = game.at(5,5) 
+	method image() = "jugador.png"
+	method nombre() = "Roque"
+	
+	// .truncate(0)    <- limita los decimales
+	
+}

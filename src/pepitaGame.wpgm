@@ -17,8 +17,11 @@ program PepitaGame {
 	game.addVisual(buenosAires)
 	game.addVisual(villaGesell)
 	game.addVisual(pepita)
+	game.addVisual(pepona)
 
+//  COLISIONES
 
+	game.whenCollideDo(pepona, {ave => pepona.nuevaAmiga(ave) })
 
 
 //	TECLADO
