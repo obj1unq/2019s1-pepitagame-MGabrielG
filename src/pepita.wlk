@@ -14,6 +14,7 @@ object pepita {
 						
 						}
 	}
+
 	method come(comida) {
 		energia = energia + comida.energia()
 	}
@@ -27,7 +28,7 @@ object pepita {
 			ciudad = unaCiudad
 		}
 		else{
-			game.say(self, "Ya estoy en!")
+			game.say(self, "Ya estoy en " + unaCiudad.nombre() + "!")
 		}
 	}
 
@@ -37,4 +38,8 @@ object pepita {
 		energia -= self.energiaParaVolar(position.distance(nuevaPosicion))
 		self.position(nuevaPosicion)
 	}	
+	
+
 }
+
+
