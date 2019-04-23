@@ -1,5 +1,6 @@
 import ciudades.*
 import wollok.game.*
+import comidas.*
 
 object pepita {
 	var property energia = 100
@@ -51,16 +52,45 @@ object pepona {
 	method nombre() = "Pepona"
 
 	method nuevaAmiga(ave){
-		game.say(self, "¡Hola" + ave.nombre() + "!")
+		game.say(self, "¡Hola " + ave.nombre() + "!")
 	}
 
 }
 
 object roque{
-	var property position = game.at(5,5) 
+	var property position = game.at(5,6) 
+	var comidaGuardada = vacio
 	method image() = "jugador.png"
 	method nombre() = "Roque"
 	
+	method move(nuevaPosicion) {
+		self.position(nuevaPosicion)
+	}	
+	
+	method posicionarComida(comida){
+		comida.posicionX(self.randomInt(0, 10) )
+		comida.posicionY(self.randomInt(0, 10) )
+	}
+	
+	
 	// .truncate(0)    <- limita los decimales
+	method randomInt(x, y){
+		return (x.randomUpTo(y + 0.9999)).truncate(1)
+	}
+	
+	method guardarComida(comida){
+		self.soltarComida(comidaGuardada)
+		game.removeVisual(comida)
+		comida.posicionX(15)
+		comida.posicionY(15)
+		comidaGuardada = comida
+	}
+
+	method soltarComida(comida){
+		self.posicionarComida(comida)
+		game.addVisual(comida)
+		comidaGuardada = vacio
+	}
+	
 	
 }
