@@ -2,6 +2,7 @@ import ciudades.*
 import wollok.game.*
 import comidas.*
 
+
 object pepita {
 	var property energia = 100
 	var property ciudad = buenosAires 
@@ -39,9 +40,25 @@ object pepita {
 	method energiaParaVolar(distancia) = 15 + 5 * distancia
 
 	method move(nuevaPosicion) {
-		energia -= self.energiaParaVolar(position.distance(nuevaPosicion))
-		self.position(nuevaPosicion)
+//		if (energia >= self.energiaParaVolar(position.distance(nuevaPosicion))){
+				energia -= self.energiaParaVolar(position.distance(nuevaPosicion))
+				self.position(nuevaPosicion)
+//		} else {
+//			game.say(self, "Dame de comer primero!")
+//		}
 	}	
+	
+	
+	
+	method teChoco(alguien){
+		//No hace nada
+	}
+	 
+	method guardarComida(comida){
+		self.come(comida)
+		game.removeVisual(comida)
+
+	}
 	
 
 }
@@ -53,6 +70,13 @@ object pepona {
 
 	method nuevaAmiga(ave){
 		game.say(self, "¡Hola " + ave.nombre() + "!")
+	}
+	
+	
+	
+	
+	method teChoco(alguien){
+		//No hace nada
 	}
 
 }
@@ -68,29 +92,35 @@ object roque{
 	}	
 	
 	method posicionarComida(comida){
-		comida.posicionX(self.randomInt(0, 10) )
-		comida.posicionY(self.randomInt(0, 10) )
+		if (comida != vacio){
+			comida.position (game.at(
+								(self.randomInt(0, 10) ), (self.randomInt(0, 10) )
+									))
+		}						
 	}
 	
 	
 	// .truncate(0)    <- limita los decimales
 	method randomInt(x, y){
-		return (x.randomUpTo(y + 0.9999)).truncate(1)
+		return (x.randomUpTo(y)).truncate(1)
 	}
 	
 	method guardarComida(comida){
 		self.soltarComida(comidaGuardada)
 		game.removeVisual(comida)
-		comida.posicionX(15)
-		comida.posicionY(15)
 		comidaGuardada = comida
 	}
-
+ 
 	method soltarComida(comida){
 		self.posicionarComida(comida)
 		game.addVisual(comida)
 		comidaGuardada = vacio
 	}
 	
+	
+	
+	method teChoco(alguien){
+		//No hace nada
+	}
 	
 }

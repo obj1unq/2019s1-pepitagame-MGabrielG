@@ -1,30 +1,31 @@
 import wollok.game.*
 
-object manzana {
-	var property posicionX = 5
-	var property posicionY = 1
+class Manzana {
+	var property position = game.at(5,1) 
 	
 	method image() = "manzana.png"
-	method position() = game.at(posicionX,posicionY)
 	
 	method energia() = 80
+	
+	method teChoco(alguien){
+		alguien.guardarComida(self)
+	}
 }
 
-object alpiste {
-	var property posicionX = 5
-	var property posicionY = 5
-	
+class Alpiste {
+	var property position = game.at(5,5) 
 	method image() = "alpiste.png"
-	method position() = game.at(posicionX,posicionY)
+	
+	method teChoco(alguien){
+		alguien.guardarComida(self)
+	}
 	
 	method energia() = 5
 }
 object vacio {
-	var property posicionX = 20
-	var property posicionY = 20
+	var property position = game.at(20, 20) 
 	
 	method image() = "ciudad.png"
-	method position() = game.at(20,20)
 	
 	method energia() = 0
 	

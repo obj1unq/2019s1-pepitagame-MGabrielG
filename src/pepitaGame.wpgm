@@ -11,21 +11,26 @@ program PepitaGame {
 	game.width(10)
 	game.ground("suelo.png")
 
+	var alpiste1 = new Alpiste()
+	var manzana1 = new Manzana()
+
 //	VISUALES
-	game.addVisual(alpiste)
-	game.addVisual(manzana)
+	game.addVisual(alpiste1)
+	game.addVisual(manzana1)
 	game.addVisual(buenosAires)
 	game.addVisual(villaGesell)
 	game.addVisual(pepita)
 	game.addVisual(pepona)
 	game.addVisual(roque)
+	
 
 //  COLISIONES
 
 	game.whenCollideDo(pepona, {ave => pepona.nuevaAmiga(ave) })
+	
+	game.whenCollideDo(roque, {algo => algo.teChoco(roque)})
+	game.whenCollideDo(pepita, {algo => algo.teChoco(pepita)})
 
-	game.whenCollideDo(manzana, {caca => caca.guardarComida(manzana)})
-	game.whenCollideDo(alpiste, {caca => caca.guardarComida(alpiste)})
 
 //	TECLADO
 	keyboard.h().onPressDo { game.say(pepita, "Hola chiques!") }
@@ -34,16 +39,44 @@ program PepitaGame {
 	keyboard.b().onPressDo { pepita.volaHacia(buenosAires) }
 	
 	keyboard.m().onPressDo {
-							 pepita.volaHacia(manzana)
-							 pepita.come(manzana)
-							 game.removeVisual(manzana)
+							 pepita.volaHacia(manzana1)
+							 pepita.come(manzana1)
+							 game.removeVisual(manzana1)
 						   }
-	
+
 	keyboard.up().onPressDo { roque.move(roque.position().up(1)) }
 	keyboard.down().onPressDo { roque.move(roque.position().down(1)) }
 	keyboard.left().onPressDo { roque.move(roque.position().left(1)) }
 	keyboard.right().onPressDo { roque.move(roque.position().right(1)) }
+	
+	keyboard.w().onPressDo { pepita.move(pepita.position().up(1)) }
+	keyboard.s().onPressDo { pepita.move(pepita.position().down(1)) }
+	keyboard.a().onPressDo { pepita.move(pepita.position().left(1)) }
+	keyboard.d().onPressDo { pepita.move(pepita.position().right(1)) }	
 		
 //	START
 	game.start()
+		
+
+/*
+ * class Manzana{
+ * 		
+ * 		method teEncontro(alguien){
+ * 			alguien.recolectarComida(self)
+ * 		}
+ * 
+ * }
+ */
+	object {
+		method agregarVisual(objeto) { 
+			game.addVisual(objeto)
+		}
+
+		method quitarVisual(objeto) {
+			game.removeVisual(objeto)
+		}
+	
+	}
+
 }
+
